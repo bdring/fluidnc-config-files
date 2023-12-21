@@ -1,0 +1,96 @@
+name: ZenXY V2
+board: TMC2209 Pen Laser
+
+kinematics:
+  CoreXY:
+
+stepping:
+  engine: RMT
+  idle_ms: 250
+  dir_delay_us: 0
+  pulse_us: 4
+  disable_delay_us: 0
+
+axes:
+  x:
+    steps_per_mm: 100.000
+    max_rate_mm_per_min: 8000.000
+    acceleration_mm_per_sec2: 300.000
+    max_travel_mm: 692.000
+    soft_limits: false
+    homing:
+      cycle: 2
+      mpos_mm: 0.000
+      positive_direction: false
+      settle_ms: 250.000
+      seek_mm_per_min: 1000.000
+      feed_mm_per_min: 500.000
+      seek_scaler: 1.1
+      feed_scaler: 5
+    motor0:
+      limit_neg_pin: gpio.33
+      hard_limits: false
+      pulloff_mm: 1.000
+      tmc_2209:
+        direction_pin: gpio.26
+        step_pin: gpio.12
+        r_sense_ohms: 0.110
+        addr: 0
+        run_amps: 0.500
+        hold_amps: 0.325
+        microsteps: 4
+        run_mode: StealthChop
+        homing_mode: StealthChop
+        use_enable: false
+        uart:
+          txd_pin: gpio.22
+          rxd_pin: gpio.21
+          rts_pin: NO_PIN
+          cts_pin: NO_PIN
+          baud: 115200
+          mode: 8N1
+    
+  y:
+    steps_per_mm: 100.000
+    max_rate_mm_per_min: 8000.000
+    acceleration_mm_per_sec2: 300.000
+    max_travel_mm: 1306.000
+    soft_limits: false
+    homing:
+      cycle: 1
+      mpos_mm: 0.000
+      positive_direction: false
+      settle_ms: 250.000
+      seek_mm_per_min: 1000.000
+      feed_mm_per_min: 500.000
+      seek_scaler: 1.1
+      feed_scaler: 5
+    motor0:
+      limit_neg_pin: gpio.32
+      hard_limits: false      
+      pulloff_mm: 1.000
+      tmc_2209:
+        direction_pin: gpio.25
+        step_pin: gpio.14
+        r_sense_ohms: 0.110
+        addr: 1
+        run_amps: 0.500
+        hold_amps: 0.325
+        microsteps: 16
+        run_mode: StealthChop
+        homing_mode: StealthChop
+        use_enable: false
+
+spi:
+  miso_pin: gpio.19
+  mosi_pin: gpio.23
+  sck_pin: gpio.18
+
+sdcard:
+  cs_pin: gpio.5
+
+start:
+  must_home: false
+  check_limits: false
+  deactivate_parking: true
+

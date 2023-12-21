@@ -1,0 +1,188 @@
+name: "TMC2209 XYYZ PWM"
+board: "FluidNC 4X 2209"
+
+
+stepping:
+  engine: I2S_STREAM
+  idle_ms: 250
+  dir_delay_us: 1
+  pulse_us: 4
+  disable_delay_us: 0
+  
+uart1:
+  txd_pin: gpio.16
+  rxd_pin: gpio.4
+  baud: 115200
+  mode: 8N1
+
+axes:
+  shared_stepper_disable_pin: NO_PIN
+  
+  x:
+    steps_per_mm: 171.54
+    max_rate_mm_per_min: 10000.000
+    acceleration_mm_per_sec2: 40.000
+    max_travel_mm: 6200.000
+    homing:
+      cycle: 1
+      mpos_mm: 0
+      positive_direction: false
+      seek_mm_per_min: 2000
+      feed_mm_per_min: 200
+      seek_scaler: 1.5
+      feed_scaler: 1.5
+    
+    motor0:
+      limit_neg_pin: gpio.36:low
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      pulloff_mm: 10.000
+      tmc_2209:
+        uart_num: 1
+        addr: 0
+        r_sense_ohms: 0.110
+        run_amps: 1.000
+        hold_amps: 0.500
+        microsteps: 16
+        stallguard: 0
+        stallguard_debug: false
+        toff_disable: 0
+        toff_stealthchop: 5
+        toff_coolstep: 3
+       
+        run_mode: CoolStep
+        homing_mode: CoolStep
+        use_enable: false
+        direction_pin: i2so.1
+        step_pin: i2so.2
+        disable_pin: i2so.0
+
+  y:
+    steps_per_mm: 171.54
+    max_rate_mm_per_min: 10000
+    acceleration_mm_per_sec2: 40
+    max_travel_mm: 1400
+    homing:
+      cycle: 1
+      mpos_mm: 0
+      positive_direction: false
+      seek_mm_per_min: 2000
+      feed_mm_per_min: 200
+      seek_scaler: 1.5
+      feed_scaler: 1.5
+
+    motor0:
+      limit_neg_pin: gpio.39:low
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      pulloff_mm: 10.000
+      tmc_2209:
+        uart_num: 1
+        addr: 1
+        r_sense_ohms: 0.110
+        run_amps: 1.000
+        hold_amps: 0.500
+        microsteps: 16
+        stallguard: 0
+        stallguard_debug: false
+        toff_disable: 0
+        toff_stealthchop: 5
+        toff_coolstep: 3
+        run_mode: CoolStep
+        homing_mode: CoolStep
+        use_enable: false
+        direction_pin: i2so.4
+        step_pin: i2so.5
+        disable_pin: i2so.7
+        
+    motor1:
+      limit_neg_pin: gpio.34:low
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      pulloff_mm: 2.000
+      tmc_2209:
+        uart_num: 1
+        addr: 2
+        r_sense_ohms: 0.110
+        run_amps: 1.000
+        hold_amps: 0.500
+        microsteps: 16
+        stallguard: 0
+        stallguard_debug: false
+        toff_disable: 0
+        toff_stealthchop: 5
+        toff_coolstep: 3
+        run_mode: CoolStep
+        homing_mode: CoolStep
+        use_enable: false
+        direction_pin: i2so.9
+        step_pin: i2so.10
+        disable_pin: i2so.8
+
+  z:
+    steps_per_mm: 395.8
+    max_rate_mm_per_min: 1000
+    acceleration_mm_per_sec2: 40
+    max_travel_mm: 200
+    homing:
+      cycle: 2
+      mpos_mm: 0
+      positive_direction: false
+      seek_mm_per_min: 1000
+      feed_mm_per_min: 200
+    motor0:
+      limit_neg_pin: NO_PIN
+      limit_pos_pin: gpio.35:low
+      limit_all_pin: NO_PIN
+      pulloff_mm: 10.000
+      tmc_2209:
+        uart_num: 1
+        addr: 3
+        r_sense_ohms: 0.110
+        run_amps: 1.000
+        hold_amps: 0.500
+        microsteps: 16
+        stallguard: 0
+        stallguard_debug: false
+        toff_disable: 0
+        toff_stealthchop: 5
+        toff_coolstep: 3
+        run_mode: CoolStep
+        homing_mode: CoolStep
+        use_enable: false
+        direction_pin: i2so.12
+        step_pin: i2so.13
+        disable_pin: i2so.15
+
+spi:
+  miso_pin: gpio.19
+  mosi_pin: gpio.23
+  sck_pin: gpio.18
+  
+i2so:
+  bck_pin: gpio.22
+  data_pin: gpio.21
+  ws_pin: gpio.17
+
+sdcard:
+  cs_pin: gpio.5
+  card_detect_pin: NO_PIN
+  
+coolant:
+  flood_pin: NO_PIN
+  mist_pin: gpio.27
+  delay_ms: 0
+  
+pwm:
+  pwm_hz: 5000
+  direction_pin: NO_PIN
+  output_pin: gpio.25
+  enable_pin: gpio.26
+  disable_with_s0: false
+  s0_with_disable: true
+  spinup_ms: 0
+  spindown_ms: 0
+  tool_num: 0
+  speed_map: 0=0.000% 10000=100.000%
+  off_on_alarm: false
+

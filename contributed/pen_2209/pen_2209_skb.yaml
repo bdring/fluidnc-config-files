@@ -1,0 +1,119 @@
+name: "TMC2209 SketchBook"
+board: "FluidNC Pen/Laser 2209"
+
+stepping:
+  engine: RMT
+  idle_ms: 255
+  dir_delay_us: 1
+  pulse_us: 2
+  disable_delay_us: 0
+  
+kinematics:
+  corexy:
+
+axes:
+  shared_stepper_disable_pin: gpio.13:high
+  
+  x:
+    # 20 Steps/rev * 8 ms
+    steps_per_mm: 160
+    max_rate_mm_per_min: 500
+    acceleration_mm_per_sec2: 15
+    max_travel_mm: 1000
+    soft_limits: false
+    homing:
+      cycle: 1
+      positive_direction: false
+      mpos_mm: 0.000
+      feed_mm_per_min: 100.000
+      seek_mm_per_min: 200.000
+      settle_ms: 500
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+    
+    motor0:
+      limit_neg_pin: gpio.36:low
+      #Diag pin is gpio.34
+      tmc_2209:
+        uart:
+          txd_pin: gpio.17
+          rxd_pin: gpio.16
+          rts_pin: NO_PIN
+          cts_pin: NO_PIN
+          baud: 115200
+          mode: 8N1
+
+        addr: 0
+        r_sense_ohms: 0.110
+        run_amps: 0.600
+        hold_amps: 0.100
+        microsteps: 8
+        stallguard: 0
+        stallguard_debug: false
+        toff_disable: 0
+        toff_stealthchop: 5
+        toff_coolstep: 3
+        run_mode: StealthChop
+        homing_mode: StealthChop
+        use_enable: false
+        direction_pin: gpio.12
+        step_pin: gpio.14
+        disable_pin: NO_PIN
+    
+    
+    motor1:
+      null_motor:
+
+  y:
+    steps_per_mm: 160
+    max_rate_mm_per_min: 500
+    acceleration_mm_per_sec2: 15
+    max_travel_mm: 1000
+    soft_limits: false
+    homing:
+      cycle: 2
+      positive_direction: false
+      mpos_mm: 0.000
+      feed_mm_per_min: 100.000
+      seek_mm_per_min: 200.000
+      settle_ms: 500
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: gpio.39:low
+      #diag pin is gpio.35
+      tmc_2209:
+        addr: 1
+        r_sense_ohms: 0.110
+        run_amps: 0.500
+        hold_amps: 0.100
+        microsteps: 8
+        stallguard: 0
+        stallguard_debug: false
+        toff_disable: 0
+        toff_stealthchop: 5
+        toff_coolstep: 3
+        run_mode: StealthChop
+        homing_mode: StealthChop
+        use_enable: false
+        direction_pin: gpio.26
+        step_pin: gpio.25
+        disable_pin: NO_PIN
+    motor1:
+      null_motor:
+
+spi:
+  miso_pin: gpio.19
+  mosi_pin: gpio.23
+  sck_pin: gpio.18
+
+sdcard:
+  cs_pin: gpio.5
+  card_detect_pin: NO_PIN
+
+start:
+  must_home: false
+
+
+

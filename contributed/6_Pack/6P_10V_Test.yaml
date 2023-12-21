@@ -1,0 +1,37 @@
+board: 6 Pack
+name: 6 Pack 10V Test
+
+start:
+  must_home: false
+
+stepping:
+  engine: I2S_STREAM
+  idle_ms: 250
+  pulse_us: 4
+  dir_delay_us: 1
+  disable_delay_us: 0
+
+i2so:
+  bck_pin: gpio.22
+  data_pin: gpio.21
+  ws_pin: gpio.17
+
+spi:
+  miso_pin: gpio.19
+  mosi_pin: gpio.23
+  sck_pin: gpio.18
+
+sdcard:
+  card_detect_pin: NO_PIN
+  cs_pin: gpio.5
+
+#Socket 3
+10V:
+  output_pin: gpio.26
+  forward_pin: gpio.4
+  reverse_pin: gpio.16
+  spinup_ms: 0
+  spindown_ms: 0
+  tool_num: 0
+  speed_map: 0=0% 24000=100%
+  
