@@ -216,7 +216,7 @@ start:
 # #begin PWM
 pwm:
   pwm_hz: 5000
-  direction_pin: NO_PIN
+  direction_pin: gpio.15
   output_pin: gpio.13
   enable_pin: gpio.14
   disable_with_s0: false
