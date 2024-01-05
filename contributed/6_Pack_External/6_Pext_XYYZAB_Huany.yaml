@@ -65,7 +65,7 @@ axes:
         disable_pin: I2SO.7:low
     
     motor1:
-      limit_neg_pin: gpio.36:low
+      limit_neg_pin: NO_PIN
       limit_pos_pin: NO_PIN
       limit_all_pin: NO_PIN
       hard_limits: false
@@ -119,7 +119,7 @@ axes:
       feed_scaler: 1.100
 
     motor0:
-      limit_neg_pin: gpio.36:low
+      limit_neg_pin: gpio.33:low
       limit_pos_pin: NO_PIN
       limit_all_pin: NO_PIN
       hard_limits: false
