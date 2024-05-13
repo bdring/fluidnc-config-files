@@ -1,4 +1,4 @@
-name: "TMC2209 XYYZ PWM"
+name: "TMC2209 XXYZ PWM"
 board: "FluidNC 4X 2209"
 
 
@@ -6,7 +6,7 @@ stepping:
   engine: I2S_STREAM
   idle_ms: 250
   dir_delay_us: 1
-  pulse_us: 4
+  pulse_us: 10
   disable_delay_us: 0
   
 uart1:
@@ -19,56 +19,49 @@ axes:
   shared_stepper_disable_pin: NO_PIN
   
   x:
-    steps_per_mm: 53.33
-    max_rate_mm_per_min: 18000
-    acceleration_mm_per_sec2: 950
-    max_travel_mm: 750
+    steps_per_mm: 171.54
+    max_rate_mm_per_min: 10000.000
+    acceleration_mm_per_sec2: 40.000
+    max_travel_mm: 6200.000
     homing:
       cycle: 1
       mpos_mm: 0
       positive_direction: false
-      seek_mm_per_min: 3000
-      feed_mm_per_min: 240
+      seek_mm_per_min: 2000
+      feed_mm_per_min: 200
+      seek_scaler: 1.5
+      feed_scaler: 1.5
     
     motor0:
       limit_neg_pin: gpio.36:low
       limit_pos_pin: NO_PIN
       limit_all_pin: NO_PIN
+      pulloff_mm: 10.000
       tmc_2209:
         uart_num: 1
         addr: 0
         r_sense_ohms: 0.110
         run_amps: 1.000
         hold_amps: 0.500
-        microsteps: 4
+        microsteps: 16
         stallguard: 0
         stallguard_debug: false
         toff_disable: 0
         toff_stealthchop: 5
         toff_coolstep: 3
+       
         run_mode: CoolStep
         homing_mode: CoolStep
         use_enable: false
         direction_pin: i2so.1
         step_pin: i2so.2
         disable_pin: i2so.0
-
-  y:
-    steps_per_mm: 53.33
-    max_rate_mm_per_min: 18000
-    acceleration_mm_per_sec2: 950
-    max_travel_mm: 410
-    homing:
-      cycle: 1
-      mpos_mm: 0
-      positive_direction: false
-      seek_mm_per_min: 3000
-      feed_mm_per_min: 240
-
-    motor0:
+        
+    motor1:
       limit_neg_pin: gpio.39:low
       limit_pos_pin: NO_PIN
       limit_all_pin: NO_PIN
+      pulloff_mm: 10.000
       tmc_2209:
         uart_num: 1
         addr: 1
@@ -81,29 +74,32 @@ axes:
         toff_disable: 0
         toff_stealthchop: 5
         toff_coolstep: 3
-        run_mode: StealthChop
-        homing_mode: StealthChop
+        run_mode: CoolStep
+        homing_mode: CoolStep
         use_enable: false
         direction_pin: i2so.4
         step_pin: i2so.5
         disable_pin: i2so.7
 
-  z:
-    steps_per_mm: 400
-    max_rate_mm_per_min: 200
-    acceleration_mm_per_sec2: 25
-    max_travel_mm: 200
+  y:
+    steps_per_mm: 171.54
+    max_rate_mm_per_min: 10000
+    acceleration_mm_per_sec2: 40
+    max_travel_mm: 1400
     homing:
-      cycle: 2
+      cycle: 1
       mpos_mm: 0
       positive_direction: false
-      seek_mm_per_min: 200
-      feed_mm_per_min: 100
-    
+      seek_mm_per_min: 2000
+      feed_mm_per_min: 200
+      seek_scaler: 1.5
+      feed_scaler: 1.5
+
     motor0:
-      limit_neg_pin: NO_PIN
-      limit_pos_pin: gpio.34:low
+      limit_neg_pin: gpio.34:low
+      limit_pos_pin: NO_PIN
       limit_all_pin: NO_PIN
+      pulloff_mm: 10.000
       tmc_2209:
         uart_num: 1
         addr: 2
@@ -116,29 +112,29 @@ axes:
         toff_disable: 0
         toff_stealthchop: 5
         toff_coolstep: 3
-        run_mode: StealthChop
-        homing_mode: StealthChop
+        run_mode: CoolStep
+        homing_mode: CoolStep
         use_enable: false
         direction_pin: i2so.9
         step_pin: i2so.10
         disable_pin: i2so.8
-        
-  a:
-    steps_per_mm: 400
-    max_rate_mm_per_min: 200
-    acceleration_mm_per_sec2: 25
+
+  z:
+    steps_per_mm: 395.8
+    max_rate_mm_per_min: 1000
+    acceleration_mm_per_sec2: 40
     max_travel_mm: 200
     homing:
       cycle: 2
       mpos_mm: 0
       positive_direction: false
-      seek_mm_per_min: 200
-      feed_mm_per_min: 100
-    
+      seek_mm_per_min: 2000
+      feed_mm_per_min: 200
     motor0:
       limit_neg_pin: NO_PIN
       limit_pos_pin: gpio.35:low
       limit_all_pin: NO_PIN
+      pulloff_mm: 10.000
       tmc_2209:
         uart_num: 1
         addr: 3
@@ -151,8 +147,8 @@ axes:
         toff_disable: 0
         toff_stealthchop: 5
         toff_coolstep: 3
-        run_mode: StealthChop
-        homing_mode: StealthChop
+        run_mode: CoolStep
+        homing_mode: CoolStep
         use_enable: false
         direction_pin: i2so.12
         step_pin: i2so.13
@@ -172,21 +168,21 @@ sdcard:
   cs_pin: gpio.5
   card_detect_pin: NO_PIN
   
-probe:
-  pin: gpio.32
-  check_mode_start: true
-
+coolant:
+  flood_pin: NO_PIN
+  mist_pin: gpio.27
+  delay_ms: 0
   
 pwm:
   pwm_hz: 5000
   direction_pin: NO_PIN
-  output_pin: gpio.26
-  enable_pin: gpio.27
+  output_pin: gpio.25
+  enable_pin: gpio.26
   disable_with_s0: false
   s0_with_disable: true
   spinup_ms: 0
   spindown_ms: 0
-  tool_num: 1
-  speed_map: 0=0.000% 10000=100.000%
+  tool_num: 0
+  speed_map: 0=0.000% 24000=100.000%
   off_on_alarm: false
 

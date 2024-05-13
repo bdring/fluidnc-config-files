@@ -29,14 +29,7 @@ axes:
       limit_pos_pin: NO_PIN
       limit_all_pin: NO_PIN
       tmc_2209:
-        uart:
-          txd_pin: gpio.16
-          rxd_pin: gpio.4
-          rts_pin: NO_PIN
-          cts_pin: NO_PIN
-          baud: 115200
-          mode: 8N1
-
+        uart_num: 1
         addr: 0
         r_sense_ohms: 0.110
         run_amps: 1.000
@@ -71,6 +64,7 @@ axes:
       limit_pos_pin: NO_PIN
       limit_all_pin: NO_PIN
       tmc_2209:
+        uart_num: 1
         addr: 1
         r_sense_ohms: 0.110
         run_amps: 1.000
@@ -105,6 +99,7 @@ axes:
       limit_pos_pin: gpio.34:low
       limit_all_pin: NO_PIN
       tmc_2209:
+        uart_num: 1
         addr: 2
         r_sense_ohms: 0.110
         run_amps: 1.000
@@ -139,6 +134,7 @@ axes:
       limit_pos_pin: gpio.35:low
       limit_all_pin: NO_PIN
       tmc_2209:
+        uart_num: 1
         addr: 3
         r_sense_ohms: 0.110
         run_amps: 1.000
