@@ -1,0 +1,166 @@
+board: Makerbase XY DLC32 V1.0
+name: Sculpfun S9
+meta: M. Hüpkes 2024-05-27 Rev 1
+
+arc_tolerance_mm: 0.002
+junction_deviation_mm: 0.01
+verbose_errors: true
+report_inches: false
+
+start:
+  must_home: true
+  deactivate_parking: true
+  check_limits: false
+
+stepping:
+  engine: I2S_STATIC
+  idle_ms: 25
+  pulse_us: 10
+  dir_delay_us: 0
+  disable_delay_us: 0
+  segments: 12
+
+axes:
+  shared_stepper_disable_pin: I2SO.0
+  shared_stepper_reset_pin: NO_PIN
+  homing_runs: 2
+
+  x:
+    steps_per_mm: 80.000
+    max_rate_mm_per_min: 6000.000
+    acceleration_mm_per_sec2: 1000.000
+    max_travel_mm: 375.000
+    soft_limits: true
+    homing:
+      cycle: 1
+      allow_single_axis: true
+      positive_direction: false
+      mpos_mm: 1.000
+      seek_mm_per_min: 5000.000
+      feed_mm_per_min: 250.000
+      settle_ms: 250
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: gpio.36:low
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 1.000
+      stepstick:
+        step_pin: I2SO.1
+        direction_pin: I2SO.2
+
+  y:
+    steps_per_mm: 80.000
+    max_rate_mm_per_min: 6000.000
+    acceleration_mm_per_sec2: 1000.000
+    max_travel_mm: 395.000
+    soft_limits: true
+    homing:
+      cycle: 1
+      allow_single_axis: true
+      positive_direction: false
+      mpos_mm: 1.000
+      seek_mm_per_min: 5000.000
+      feed_mm_per_min: 250.000
+      settle_ms: 250
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: gpio.35:low
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 1.000
+      stepstick:
+        step_pin: I2SO.5
+        direction_pin: I2SO.6
+
+  z:
+    steps_per_mm: 250.000
+    max_rate_mm_per_min: 1000.000
+    acceleration_mm_per_sec2: 1000.000
+    max_travel_mm: 200.000
+    soft_limits: true
+    homing:
+      cycle: -1
+      allow_single_axis: false
+      positive_direction: false
+      mpos_mm: 0.000
+      seek_mm_per_min: 5000.000
+      feed_mm_per_min: 250.000
+      settle_ms: 250
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: gpio.34:low
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 0.000
+      stepstick:
+        step_pin: I2SO.3
+        direction_pin: I2SO.4
+
+coolant:
+  mist_pin: NO_PIN
+  flood_pin: NO_PIN
+  delay_ms: 0
+
+macros:
+  startup_line0:
+  startup_line1:
+  macro0:
+  macro1:
+  macro2:
+  macro3:
+  after_homing:
+  after_reset:
+  after_unlock:
+
+control:
+  safety_door_pin: NO_PIN
+  reset_pin: NO_PIN
+  feed_hold_pin: NO_PIN
+  cycle_start_pin: NO_PIN
+  macro0_pin: NO_PIN
+  macro1_pin: NO_PIN
+  macro2_pin: NO_PIN
+  macro3_pin: NO_PIN
+  fault_pin: NO_PIN
+  estop_pin: NO_PIN
+
+user_outputs:
+  digital0_pin: NO_PIN
+  digital1_pin: NO_PIN
+  digital2_pin: NO_PIN
+  digital3_pin: NO_PIN
+  digital4_pin: NO_PIN
+  digital5_pin: NO_PIN
+  digital6_pin: NO_PIN
+  digital7_pin: NO_PIN
+
+probe:
+  pin: gpio.22:low
+  toolsetter_pin: NO_PIN
+  check_mode_start: false
+  hard_stop: false
+
+Laser:
+  pwm_hz: 5000
+  output_pin: gpio.32
+  enable_pin: NO_PIN
+  disable_with_s0: true
+  s0_with_disable: true
+  tool_num: 0
+  speed_map: 0=0.000% 1000=100.000%
+  off_on_alarm: true
+
+i2so:
+  bck_pin: gpio.16
+  data_pin: gpio.21
+  ws_pin: gpio.17
