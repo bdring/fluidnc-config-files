@@ -144,6 +144,15 @@ user_outputs:
   digital6_pin: NO_PIN
   digital7_pin: NO_PIN
 
+# The board has two blocks of GPIO pins available for custom functions
+# Block 1 (besides the X limit socket, with ground pin per GPIO)
+#   gpio.19, gpio.18, gpio.5, gpio.4, gpio.0, gpio.2, gpio.15, gpio.13
+# Block 2 (besides the ESP32, without pins)
+#   gpio.39 (GND), gpio.33, gpio.25, gpio.26, gpio.27, gpio.14, gpio.12
+
+# Additionally, there is an "Extra" socket alongside the limit and probe switch sockets
+#   connected to gpio.23
+
 probe:
   pin: gpio.22:low
   toolsetter_pin: NO_PIN
