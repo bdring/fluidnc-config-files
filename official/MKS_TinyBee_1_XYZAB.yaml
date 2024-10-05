@@ -189,7 +189,7 @@ Laser:
   pwm_hz: 5000
   # EXP1 BTN_ENC
   output_pin: gpio.13
-  # FAN1
+  # HBED
   enable_pin: I2SO.16
   disable_with_s0: false
   s0_with_disable: false
