@@ -1,0 +1,216 @@
+board: Jackpot
+name:  X-Carve 1000mm
+meta: 2024-01-06 B. Dring
+stepping:
+  engine: I2S_STATIC
+  idle_ms: 255
+  pulse_us: 4
+  dir_delay_us: 1
+  disable_delay_us: 0
+  
+uart1:
+  txd_pin: gpio.0
+  rxd_pin: gpio.4
+  rts_pin: NO_PIN
+  baud: 115200
+  mode: 8N1
+
+axes:
+  shared_stepper_disable_pin: NO_PIN
+  x:
+    steps_per_mm: 40.000
+    max_rate_mm_per_min: 8000.000
+    acceleration_mm_per_sec2: 100.000
+    max_travel_mm: 740.000
+    soft_limits: false
+    homing:
+      cycle: 2
+      positive_direction: false
+      mpos_mm: 0.000
+      feed_mm_per_min: 100.000
+      seek_mm_per_min: 200.000
+      settle_ms: 500
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: gpio.25
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 1.000
+      tmc_2209:
+        uart_num: 1
+        addr: 0
+        cs_pin: NO_PIN
+        r_sense_ohms: 0.110
+        run_amps: 1.2
+        hold_amps: 0.500
+        homing_amps: 1.2
+        microsteps: 8
+        stallguard: 0
+        stallguard_debug: false
+        toff_disable: 0
+        toff_stealthchop: 5
+        toff_coolstep: 3
+        run_mode: StealthChop
+        homing_mode: StealthChop
+        use_enable: false
+        step_pin: I2SO.2
+        direction_pin: I2SO.1
+
+  y:
+    steps_per_mm: 40.000
+    max_rate_mm_per_min: 8000.000
+    acceleration_mm_per_sec2: 100.000
+    max_travel_mm: 790.000
+    soft_limits: false
+    homing:
+      cycle: 2
+      positive_direction: false
+      mpos_mm: 0.000
+      feed_mm_per_min: 100.000
+      seek_mm_per_min: 200.000
+      settle_ms: 500
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: gpio.33
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 1.000
+      tmc_2209:
+        uart_num: 1
+        addr: 1
+        cs_pin: NO_PIN
+        r_sense_ohms: 0.110
+        run_amps: 1.2
+        hold_amps: 0.500
+        homing_amps: 1.2
+        microsteps: 8
+        stallguard: 0
+        stallguard_debug: false
+        toff_disable: 0
+        toff_stealthchop: 5
+        toff_coolstep: 3
+        run_mode: StealthChop
+        homing_mode: StealthChop
+        use_enable: false
+        step_pin: I2SO.5
+        direction_pin: I2SO.4
+        disable_pin: I2SO.7
+        
+    motor1:
+      limit_neg_pin: gpio.35
+      limit_pos_pin: NO_PIN
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 1.000
+      tmc_2209:
+        uart_num: 1
+        addr: 3
+        cs_pin: i2so.14
+        r_sense_ohms: 0.110
+        run_amps: 1.2
+        hold_amps: 0.500
+        homing_amps: 1.2
+        microsteps: 8
+        stallguard: 0
+        stallguard_debug: false
+        toff_disable: 0
+        toff_stealthchop: 5
+        toff_coolstep: 3
+        run_mode: StealthChop
+        homing_mode: StealthChop
+        use_enable: false
+        step_pin: I2SO.10
+        direction_pin: I2SO.9
+        disable_pin: I2SO.8
+
+  z:
+    steps_per_mm: 377.893
+    max_rate_mm_per_min: 5000.000
+    acceleration_mm_per_sec2: 100.000
+    max_travel_mm: 150.000
+    soft_limits: false
+    homing:
+      cycle: 1
+      positive_direction: true
+      mpos_mm: 150.000
+      feed_mm_per_min: 100.000
+      seek_mm_per_min: 800.000
+      settle_ms: 500
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+
+    motor0:
+      limit_neg_pin: NO_PIN
+      limit_pos_pin: gpio.32
+      limit_all_pin: NO_PIN
+      hard_limits: false
+      pulloff_mm: 1.000
+      tmc_2209:
+        uart_num: 1
+        addr: 2
+        cs_pin: NO_PIN
+        r_sense_ohms: 0.110
+        run_amps: 1.2
+        hold_amps: 0.500
+        homing_amps: 1.2
+        microsteps: 8
+        stallguard: 0
+        stallguard_debug: false
+        toff_disable: 0
+        toff_stealthchop: 5
+        toff_coolstep: 3
+        run_mode: StealthChop
+        homing_mode: StealthChop
+        use_enable: false
+        step_pin: I2SO.13
+        direction_pin: I2SO.12
+        disable_pin: I2SO.15:low
+
+probe:
+  pin: gpio.36:low
+
+i2so:
+  bck_pin: gpio.22
+  data_pin: gpio.21
+  ws_pin: gpio.17
+
+spi:
+  miso_pin: gpio.19
+  mosi_pin: gpio.23
+  sck_pin: gpio.18
+
+sdcard:
+  card_detect_pin: NO_PIN
+  cs_pin: gpio.5
+
+start:
+  must_home: false
+  
+#Laser:
+#  pwm_hz: 5000
+#  output_pin: gpio.27
+#  enable_pin: NO_PIN
+#  disable_with_s0: false
+#  s0_with_disable: true
+#  tool_num: 0
+#  speed_map: 0=0.000% 255=100.000%
+#  off_on_alarm: true
+
+# pwm:
+#  pwm_hz: 5000
+#  direction_pin: gpio.26
+#  output_pin: gpio.27
+#  enable_pin: NO_PIN
+#  disable_with_s0: false
+#  s0_with_disable: true
+#  spinup_ms: 0
+#  spindown_ms: 0
+#  tool_num: 0
+#  speed_map: 0=0.000% 1000=100.000%
+#  off_on_alarm: false
