@@ -116,7 +116,6 @@ axes:
       hard_limits: false
       pulloff_mm: 3.000
       stepstick:
-        cs_pin: i2so.14
         step_pin: I2SO.13
         direction_pin: I2SO.12
         disable_pin: I2SO.15
@@ -144,7 +143,6 @@ axes:
       hard_limits: false
       pulloff_mm: 3.000
       stepstick:
-        cs_pin: i2so.19
         step_pin: I2SO.18
         direction_pin: I2SO.17
         disable_pin: I2SO.16
@@ -172,7 +170,6 @@ axes:
       hard_limits: false
       pulloff_mm: 3.000
       stepstick:
-        cs_pin: i2so.22
         step_pin: I2SO.21
         direction_pin: I2SO.20
         disable_pin: I2SO.23

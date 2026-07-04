@@ -1,4 +1,4 @@
-name: "TMC2209 XYYZ PWM/Relay
+name: "TMC2209 XYYZ PWM/Relay"
 board: "FluidNC 4X 2209"
 
 stepping:

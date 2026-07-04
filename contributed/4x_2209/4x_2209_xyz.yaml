@@ -137,5 +137,5 @@ sdcard:
   cs_pin: gpio.5
   card_detect_pin: NO_PIN
 
-  off_on_alarm: false
+off_on_alarm: false
 

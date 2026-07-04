@@ -87,7 +87,7 @@ axes:
         step_pin: gpio.2
         direction_pin: gpio.14
 
-a:
+  a:
     steps_per_mm: 800.000
     max_rate_mm_per_min: 5000.000
     acceleration_mm_per_sec2: 100.000

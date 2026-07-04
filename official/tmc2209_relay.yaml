@@ -9,7 +9,7 @@ stepping:
   pulse_us: 2
   disable_delay_us: 0
   
-  uart1:
+uart1:
   txd_pin: gpio.22
   rxd_pin: gpio.21
   rts_pin: NO_PIN
