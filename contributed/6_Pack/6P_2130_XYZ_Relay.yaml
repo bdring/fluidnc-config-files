@@ -1,6 +1,6 @@
 board: 6 Pack
 name: TMC2130 XYZZ Relay
-meta: 4/19/2022 B. Dring for Ben Shives
+meta: "4/19/2022 B. Dring for Ben Shives"
 stepping:
   engine: I2S_STREAM
   idle_ms: 250
