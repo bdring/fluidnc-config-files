@@ -1,7 +1,6 @@
 name: "TMC2209 XYYZ PWM"
 board: "FluidNC 4X 2209"
 
-
 stepping:
   engine: I2S_STREAM
   idle_ms: 250

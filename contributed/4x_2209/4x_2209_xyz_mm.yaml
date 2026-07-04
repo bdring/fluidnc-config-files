@@ -1,12 +1,14 @@
 name: TMC2209 XYZ
 board: FluidNC 4X 2209
-meta: 2024-02-05 B. Dring Mini Mill Test
+meta: "2024-02-05 B. Dring Mini Mill Test"
+
 stepping:
   engine: I2S_STREAM
   idle_ms: 255
   dir_delay_us: 1
   pulse_us: 4
   disable_delay_us: 0
+
 uart1:
   txd_pin: gpio.16
   rxd_pin: gpio.4
