@@ -9,7 +9,8 @@ stepping:
   pulse_us: 2
   disable_delay_us: 0
 
-homing_init_lock: true
+start:
+  must_home: true
 
 uart1:
   txd_pin: gpio.22
