@@ -74,14 +74,14 @@ jobs:
         run: |
           set -euo pipefail
           if [ "${{ github.event.inputs.validate_all }}" = "true" ]; then
-            files=$(find . -type d -name ".fluidnc-tools" -prune -o \
+            files=$(find . -type d \( -name ".fluidnc-tools" -o -name ".github" -o -name ".git" \) -prune -o \
                            -type f \( -iname '*.yaml' -o -iname '*.yml' \) -print)
           elif [ "${{ github.event_name }}" = "pull_request" ]; then
             git fetch --no-tags --depth=1 origin "${{ github.base_ref }}"
-            files=$(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" -- '*.yaml' '*.yml' || true)
+            files=$(git diff --name-only --diff-filter=ACMR "origin/${{ github.base_ref }}...HEAD" -- '*.yaml' '*.yml' ':(exclude).github/**' || true)
           else
             # push to main: diff against the previous commit
-            files=$(git diff --name-only --diff-filter=ACMR "${{ github.event.before }}" "${{ github.sha }}" -- '*.yaml' '*.yml' 2>/dev/null || true)
+            files=$(git diff --name-only --diff-filter=ACMR "${{ github.event.before }}" "${{ github.sha }}" -- '*.yaml' '*.yml' ':(exclude).github/**' 2>/dev/null || true)
           fi
           {
             echo "files<<FILES_EOF"
@@ -103,6 +103,13 @@ jobs:
           checked=0
           while IFS= read -r f; do
             [ -z "$f" ] && continue
+            # Defense in depth: never validate CI/repo-meta files as FluidNC
+            # configs, regardless of which discovery path found them (e.g.
+            # this workflow's own .yml file matches **/*.yml but is not a
+            # config.yaml -- see the incident this comment refers to).
+            case "$f" in
+              .github/*) echo "Skipping (not a config file): $f"; continue ;;
+            esac
             if [ ! -f "$f" ]; then
               echo "Skipping (deleted): $f"
               continue
