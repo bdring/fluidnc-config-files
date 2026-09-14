@@ -59,10 +59,16 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p .fluidnc-tools
-          base="https://raw.githubusercontent.com/bdring/FluidNC/${FLUIDNC_REF}/tools"
-          curl -fsSL "$base/validate_fluidnc_config.py" -o .fluidnc-tools/validate_fluidnc_config.py
-          curl -fsSL "$base/fluidnc_validate_core.py"   -o .fluidnc-tools/fluidnc_validate_core.py
-          curl -fsSL "$base/fluidnc-config-schema.json" -o .fluidnc-tools/fluidnc-config-schema.json
+          tools_base="https://raw.githubusercontent.com/bdring/FluidNC/${FLUIDNC_REF}/tools"
+          curl -fsSL "$tools_base/validate_fluidnc_config.py" -o .fluidnc-tools/validate_fluidnc_config.py
+          curl -fsSL "$tools_base/fluidnc_validate_core.py"   -o .fluidnc-tools/fluidnc_validate_core.py
+          curl -fsSL "$tools_base/config_schema_adapter.py"   -o .fluidnc-tools/config_schema_adapter.py
+          # The schema is built in-memory from config_items.yaml (see
+          # config_schema_adapter.py's own docstring) -- there is no
+          # fluidnc-config-schema.json anymore; that hand-maintained file
+          # was retired when the adapter took over.
+          docs_base="https://raw.githubusercontent.com/bdring/FluidNC/${FLUIDNC_REF}/FluidNC/docs"
+          curl -fsSL "$docs_base/config_items.yaml" -o .fluidnc-tools/config_items.yaml
           echo "Fetched tools from bdring/FluidNC@${FLUIDNC_REF}"
 
       - name: Install validator dependencies
@@ -117,7 +123,7 @@ jobs:
             checked=$((checked + 1))
             echo "::group::Validating $f"
             if ! python3 .fluidnc-tools/validate_fluidnc_config.py --no-auto-install \
-                 --schema .fluidnc-tools/fluidnc-config-schema.json $permissive_flag "$f"; then
+                 --schema .fluidnc-tools/config_items.yaml $permissive_flag "$f"; then
               fail=1
             fi
             echo "::endgroup::"
