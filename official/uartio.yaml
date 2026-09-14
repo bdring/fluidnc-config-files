@@ -18,8 +18,6 @@ uart1:
 uart_channel1:
   report_interval_ms: 75
   uart_num: 1
-  all_messages: false
-
 
 i2so:
   bck_pin: gpio.22

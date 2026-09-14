@@ -1,3 +1,6 @@
+# DO NOT VALIDATE: targets the SingleArmScara kinematics type, which was developed
+# on an unmerged branch (see origin/SingleArmScara in the FluidNC repo) and never
+# landed in mainline FluidNC -- this isn't a schema/tooling gap.
 name: "coaxial Servo"
 board: "2x 2209 Pen/Laser v2p1"
 

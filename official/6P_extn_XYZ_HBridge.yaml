@@ -108,7 +108,7 @@ sdcard:
   card_detect_pin: NO_PIN
   cs_pin: gpio.5
 
-HBridgeSpindle:
+HBridge:
   pwm_hz: 5000
   output_cw_pin: gpio.4
   output_ccw_pin: gpio.16
