@@ -23,9 +23,7 @@ kinematics:
     linkage_mm: 133.50
     end_effector_triangle_mm: 86.603
     kinematic_segment_len_mm: 0.500
-    homing_mpos_radians: 0.0
-    soft_limits: true
-    max_z_mm: -90.0
+    up_degrees: 0.0
 
 start:
   must_home: true
