@@ -1,0 +1,136 @@
+board: Creality Falcon2 v3.2.S3.402
+name: Falcon2 laser XY
+meta: |-
+  Creality Falcon2 laser engraver, stock mainboard v3.2.S3.402
+  (ESP32-S3-WROOM-1 N8R8, 2x TMC2208). Flash the esp32s3 "wifi" build.
+  X and Y with homing to the front-left switches, laser on GPIO46 (PWM)
+  with head power on GPIO45, keypad buttons, SD card, buzzer.
+  Not handled by stock FluidNC: the serial handshake the laser head
+  expects (its LED blinks yellow, the laser still fires), and the air
+  pump, an H-bridge on GPIO43/44. Those pins are also UART0, where
+  FluidNC prints its console: the idle-high TX line can leave DC on the
+  pump coil, which then overheats without running. Unplug the pump when
+  running stock FluidNC. A modified firmware that handles both is at
+  https://github.com/nicosonna/FluidNC/tree/falcon2
+  Back up the stock firmware (esptool read_flash 0 0x800000) first:
+  it is the only way back.
+
+# Pinout found by testing the machine; motion values from the stock
+# Creality firmware (CV50-MASTER V3.0.4).
+
+stepping:
+  engine: RMT
+  idle_ms: 250
+  pulse_us: 4
+  dir_delay_us: 1
+  disable_delay_us: 0
+
+axes:
+  # low = drivers enabled
+  shared_stepper_disable_pin: gpio.47
+
+  x:
+    steps_per_mm: 80.000
+    max_rate_mm_per_min: 25000.000
+    acceleration_mm_per_sec2: 1000.000
+    max_travel_mm: 400.000
+    soft_limits: true
+    homing:
+      cycle: 2
+      positive_direction: false
+      mpos_mm: 0.000
+      feed_mm_per_min: 300.000
+      seek_mm_per_min: 3000.000
+      settle_ms: 250
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+    motor0:
+      # both X switches (left and right) share this pin, high when pressed
+      limit_all_pin: gpio.40
+      hard_limits: true
+      pulloff_mm: 5.000
+      standard_stepper:
+        step_pin: gpio.39
+        direction_pin: gpio.38:low
+
+  y:
+    steps_per_mm: 80.000
+    max_rate_mm_per_min: 8000.000
+    acceleration_mm_per_sec2: 1000.000
+    max_travel_mm: 415.000
+    soft_limits: true
+    homing:
+      cycle: 1
+      positive_direction: false
+      mpos_mm: 0.000
+      feed_mm_per_min: 300.000
+      seek_mm_per_min: 3000.000
+      settle_ms: 250
+      seek_scaler: 1.100
+      feed_scaler: 1.100
+    motor0:
+      # both Y switches (front and back) share this pin, high when pressed
+      limit_all_pin: gpio.48
+      hard_limits: true
+      pulloff_mm: 5.000
+      standard_stepper:
+        step_pin: gpio.41
+        direction_pin: gpio.42
+
+spi:
+  miso_pin: gpio.4
+  mosi_pin: gpio.6
+  sck_pin: gpio.5
+
+sdcard:
+  cs_pin: gpio.7
+  card_detect_pin: NO_PIN
+  frequency_hz: 8000000
+
+start:
+  must_home: true
+
+# Keypad: each button pulls its pin low
+control:
+  # HOME button
+  homing_button_pin: gpio.10:low:pu
+  # PLAY/PAUSE button: resume
+  cycle_start_pin: gpio.14:low:pu
+  # FRAME button: feed hold
+  feed_hold_pin: gpio.13:low:pu
+  # arrow buttons UP, DOWN, LEFT, RIGHT
+  macro0_pin: gpio.11:low:pu
+  macro1_pin: gpio.9:low:pu
+  macro2_pin: gpio.3:low:pu
+  macro3_pin: gpio.12:low:pu
+
+macros:
+  # 10 mm jog per press
+  Macro0: $J=G91 G21 Y10 F6000
+  Macro1: $J=G91 G21 Y-10 F6000
+  Macro2: $J=G91 G21 X-10 F6000
+  Macro3: $J=G91 G21 X10 F6000
+
+# Serial link to the laser head (it has its own processor): 9600 8N1,
+# TX GPIO17, RX GPIO18. Unused by stock FluidNC.
+uart1:
+  txd_pin: gpio.17
+  rxd_pin: gpio.18
+  baud: 9600
+  mode: 8N1
+
+user_outputs:
+  # buzzer: M62 P0 on, M63 P0 off
+  digital0_pin: gpio.21
+
+Laser:
+  pwm_hz: 1000
+  # power PWM to the head
+  output_pin: gpio.46
+  # head power (its fan starts with it)
+  enable_pin: gpio.45
+  disable_with_s0: false
+  s0_with_disable: true
+  tool_num: 0
+  speed_map: 0=0.000% 1000=100.000%
+  off_on_alarm: true
