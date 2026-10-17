@@ -1,0 +1,75 @@
+board: Brushograph PCB revA
+name: Brushograph XYZ conservative
+meta: |-
+  openBrushograph brush painting machine on the Brushograph PCB
+  (ESP32 with on-board ULN2003 drivers) revision A using three
+  28BYJ-48 unipolar steppers. No limit switches or homing.
+  Conservative speeds: X/Y 1000 mm/min at 40 mm/s^2,
+  Z 600 mm/min at 30 mm/s^2.
+  https://github.com/openBrushograph/Brushograph_PCB
+
+stepping:
+  engine: RMT
+  idle_ms: 250
+  pulse_us: 8
+  dir_delay_us: 1
+  disable_delay_us: 0
+
+axes:
+  shared_stepper_disable_pin: NO_PIN
+
+  # steps_per_mm assume half-stepping (the unipolar default) and come from
+  # the upstream Brushograph config; calibrate them for your pulleys.
+  # To reverse an axis, swap phase0 with phase3 and phase1 with phase2.
+  x:
+    steps_per_mm: 93.000
+    max_rate_mm_per_min: 1000.000
+    acceleration_mm_per_sec2: 40.000
+    max_travel_mm: 200.000
+    soft_limits: false
+    motor0:
+      unipolar:
+        phase0_pin: gpio.27
+        phase1_pin: gpio.14
+        phase2_pin: gpio.13
+        phase3_pin: gpio.4
+        half_step: true
+
+  y:
+    steps_per_mm: 93.000
+    max_rate_mm_per_min: 1000.000
+    acceleration_mm_per_sec2: 40.000
+    max_travel_mm: 200.000
+    soft_limits: false
+    motor0:
+      unipolar:
+        phase0_pin: gpio.22
+        phase1_pin: gpio.21
+        phase2_pin: gpio.17
+        phase3_pin: gpio.16
+        half_step: true
+
+  z:
+    steps_per_mm: 108.000
+    max_rate_mm_per_min: 600.000
+    acceleration_mm_per_sec2: 30.000
+    max_travel_mm: 100.000
+    soft_limits: false
+    motor0:
+      unipolar:
+        phase0_pin: gpio.32
+        phase1_pin: gpio.33
+        phase2_pin: gpio.25
+        phase3_pin: gpio.26
+        half_step: true
+
+# The PCB's net labels are swapped relative to the SD card pins:
+# GPIO23 goes to the card's DAT0 (data out) and GPIO19 to CMD (data in).
+spi:
+  miso_pin: gpio.23
+  mosi_pin: gpio.19
+  sck_pin: gpio.18
+
+sdcard:
+  cs_pin: gpio.5
+  card_detect_pin: NO_PIN
